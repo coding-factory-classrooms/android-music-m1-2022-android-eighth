@@ -28,6 +28,8 @@ class LoginViewModel : ViewModel(){
 
     private val api : LoginAPI
 
+
+
     init {
         // WARNING
         // This init should be done ONCE in the app

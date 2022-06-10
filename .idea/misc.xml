@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/activity_artist_list.xml" value="0.2" />
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/activity_main.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/fragment_login.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/item_artist.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10520833333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.10416666666666667" />
       </map>
     </option>
   </component>
