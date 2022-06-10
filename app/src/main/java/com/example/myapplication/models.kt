@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import com.example.myapplication.api.APIArtist
+
 data class AuthToken(
     val username : String,
     val password : String,
@@ -25,6 +27,6 @@ data class Song(
     val file_url:String,
     val duration:Int,
     val created_at: String,
-    val artist: Int
+    val artistId: Int
 )
 

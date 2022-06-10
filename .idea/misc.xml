@@ -11,7 +11,9 @@
         <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/fragment_artist_list.xml" value="0.24728260869565216" />
         <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/fragment_login.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/fragment_song_list.xml" value="0.24728260869565216" />
         <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/item_artist.xml" value="0.67" />
+        <entry key="..\:/Users/eddwa/Desktop/Project/android-music-m1-2021-android-eighth/app/src/main/res/layout/item_song.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
       </map>
     </option>

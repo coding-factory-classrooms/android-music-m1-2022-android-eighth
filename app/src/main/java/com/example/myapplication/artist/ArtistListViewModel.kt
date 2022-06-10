@@ -23,7 +23,6 @@ class ArtistListViewModel : ViewModel() {
             override fun onResponse(call: Call<List<APIArtist>>, response: Response<List<APIArtist>>) {
                 val apiArtists = response.body()
                 Log.d(TAG, "onResponse: API MOVIES : $apiArtists ")
-                Log.d(TAG, "onResponse: $globalApiKey")
                 artistLiveData.value=apiArtists!!
             }
 
@@ -33,4 +32,6 @@ class ArtistListViewModel : ViewModel() {
 
         })
     }
+
+
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.login.LoginViewModel
+import androidx.navigation.fragment.findNavController
 
 class HomeFragment : Fragment() {
     val viewModel : LoginViewModel by viewModels()
@@ -24,4 +25,5 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 }
