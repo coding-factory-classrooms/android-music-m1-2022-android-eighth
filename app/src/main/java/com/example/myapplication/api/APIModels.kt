@@ -9,7 +9,7 @@ data class APIUserInfo(val username : String, val password : String)
 data class APIToken (val token : String)
 
 @JsonClass(generateAdapter = true)
-data class APIArtistList(
+data class APIArtist(
     val id : Int,
     val name : String,
     val genre_name : String,

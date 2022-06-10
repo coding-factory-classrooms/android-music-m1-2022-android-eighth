@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Artist
+import com.example.myapplication.api.APIArtist
 import com.example.myapplication.databinding.ItemArtistBinding
+import com.squareup.picasso.Picasso
 
 
-class ArtistAdapter(private var artists:List<Artist>)
+class ArtistAdapter(private var artists:List<APIArtist>)
     :RecyclerView.Adapter<ArtistAdapter.ViewHolder>(){
     class ViewHolder(val binding: ItemArtistBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -23,6 +25,8 @@ class ArtistAdapter(private var artists:List<Artist>)
         val artist = artists[position]
         with(holder.binding){
             artistNameView.text=artist.name
+            Picasso.get().load(artist.album_cover_url)
+                .into(imageView)
 
         }
     }
@@ -30,7 +34,7 @@ class ArtistAdapter(private var artists:List<Artist>)
     override fun getItemCount(): Int = artists.size
 
 
-    fun updateDataSet(artists: List<Artist>) {
+    fun updateDataSet(artists: List<APIArtist>) {
         this.artists = artists
         notifyDataSetChanged()
     }

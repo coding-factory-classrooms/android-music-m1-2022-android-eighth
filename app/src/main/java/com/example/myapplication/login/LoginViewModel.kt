@@ -3,10 +3,7 @@ package com.example.myapplication.login
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.api.APIToken
-import com.example.myapplication.api.APIUserInfo
-import com.example.myapplication.api.LoginAPI
-import com.example.myapplication.api.globalApiKey
+import com.example.myapplication.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -29,26 +26,10 @@ class LoginViewModel : ViewModel(){
     private val api : LoginAPI
 
 
-
     init {
-        // WARNING
-        // This init should be done ONCE in the app
-        // Application class is a good place
-        val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
-
-        val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://music.gryt.tech/")
-            .client(client)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-
-        api = retrofit.create(LoginAPI::class.java)
+        api = ServiceBuilder.buildService(LoginAPI::class.java)
     }
+
 
 
     fun login(username : String , password : String) {

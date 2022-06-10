@@ -10,7 +10,4 @@ interface LoginAPI {
     @POST("api-token-auth/")
     fun getLoginToken(@Body userInfo: APIUserInfo): Call<APIToken>
 
-    @GET("api/artists/")
-    fun GetArtistsList(@Header("api_key") apiKey:String) :
-            Call<APIArtistList>
 }
