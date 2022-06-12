@@ -21,17 +21,17 @@
     <TextView
         android:id="@+id/SongTitleView"
         android:layout_width="347dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginTop="52dp"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Title of the song"
-        android:textColor = "?android:textColorPrimary"
-        android:textSize="20dp"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <RelativeLayout
         android:layout_width="411dp"
