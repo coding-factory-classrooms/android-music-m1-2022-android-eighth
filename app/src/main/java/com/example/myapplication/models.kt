@@ -1,6 +1,9 @@
 package com.example.myapplication
 
+import android.os.Parcelable
 import com.example.myapplication.api.APIArtist
+import com.example.myapplication.api.ArtistAPI
+import kotlinx.parcelize.Parcelize
 
 data class AuthToken(
     val username : String,
@@ -21,6 +24,7 @@ data class Genre(
     val created_at: String
 )
 
+@Parcelize
 data class Song(
     val id : Int,
     val name: String,
@@ -28,5 +32,10 @@ data class Song(
     val duration:Int,
     val created_at: String,
     val artistId: Int
-)
+):Parcelable
 
+
+@Parcelize
+data class ListOfSongs(
+    val Songs : List<Song>
+):Parcelable

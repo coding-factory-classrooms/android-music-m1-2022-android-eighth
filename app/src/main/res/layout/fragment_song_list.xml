@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/customBgColor"
     tools:context=".song.SongListFragment">
 
 
@@ -31,7 +32,7 @@
         android:singleLine="true"
         android:text="TextView"
         android:textAlignment="textStart"
-        android:textColor="#000000"
+        android:textColor = "?android:textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/artistImageUrl"
@@ -39,6 +40,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="5dp"
         android:id="@+id/SongListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

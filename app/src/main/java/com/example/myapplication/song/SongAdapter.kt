@@ -2,8 +2,10 @@ package com.example.myapplication.song
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Song
+import com.example.myapplication.api.APIArtist
 
 import com.example.myapplication.databinding.ItemSongBinding
 
@@ -12,6 +14,10 @@ class SongAdapter(private var songs:List<Song>)
     class ViewHolder (val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
+
+    val SongLiveData = MutableLiveData<Song>(
+
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,6 +32,9 @@ class SongAdapter(private var songs:List<Song>)
             var seconds = Song.duration % 60
             songTitleView.text=Song.name
             durationView.text="$minutes"+"m$seconds"+"s"
+            itemIdView.setOnClickListener(){
+                SongLiveData.value= Song
+            }
             createdAtView.text=Song.created_at.reversed().substring(22).reversed()
         }
     }

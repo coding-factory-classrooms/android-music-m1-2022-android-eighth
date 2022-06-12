@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?attr/customBgColor"
     android:layout_height="match_parent">
 
 
@@ -14,7 +15,7 @@
         android:layout_marginTop="80dp"
         android:text="Albums"
         android:textAllCaps="true"
-        android:textColor="#3A3636"
+        android:textColor = "?android:textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

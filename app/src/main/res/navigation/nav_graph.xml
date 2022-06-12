@@ -29,5 +29,23 @@
         <argument
             android:name="album"
             app:argType="com.example.myapplication.api.APIArtist" />
+        <action
+            android:id="@+id/action_songListFragment_to_audioPlayerFragment"
+            app:destination="@id/audioPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/audioPlayerFragment"
+        android:name="com.example.myapplication.audioPlayer.AudioPlayerFragment"
+        android:label="fragment_audio_player"
+        tools:layout="@layout/fragment_audio_player" >
+        <argument
+            android:name="song"
+            app:argType="com.example.myapplication.Song" />
+        <argument
+            android:name="album"
+            app:argType="com.example.myapplication.api.APIArtist" />
+        <argument
+            android:name="listOfSongs"
+            app:argType="com.example.myapplication.Song[]" />
     </fragment>
 </navigation>
