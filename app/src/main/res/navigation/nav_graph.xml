@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_homeFragment_to_songListFragment"
             app:destination="@id/songListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/songListFragment"
@@ -48,4 +51,8 @@
             android:name="listOfSongs"
             app:argType="com.example.myapplication.Song[]" />
     </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.example.myapplication.playlist.PlaylistFragment"
+        android:label="PlaylistFragment" />
 </navigation>
