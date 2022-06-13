@@ -18,97 +18,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:layout_editor_absoluteX="-1dp">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:text="Username :"
-            android:textAlignment="textStart"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="-99dp"
-            tools:layout_editor_absoluteY="537dp" />
-
-        <EditText
-            android:id="@+id/usernameEditText"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="groupe8"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="598dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:background="?attr/customBgColor"
-            android:text="Password :"
-            android:textAlignment="textStart"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="154dp"
-            tools:layout_editor_absoluteY="316dp" />
-
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:text="mr9LrlLN79c0856D"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="339dp" />
-
-    </RelativeLayout>
-
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.508" />
 
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="15dp"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+        <EditText
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:id="@+id/usernameEditText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="groupe8"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="598dp" />
+
+        <EditText
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:id="@+id/editTextPassword"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:text="mr9LrlLN79c0856D"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="339dp" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

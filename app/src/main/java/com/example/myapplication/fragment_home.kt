@@ -15,6 +15,10 @@ import androidx.navigation.fragment.findNavController
 class HomeFragment : Fragment() {
     val viewModel : LoginViewModel by viewModels()
 
+    //Unify Media Player With This code in every fragment page
+
+
+
     lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(

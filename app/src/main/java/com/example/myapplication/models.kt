@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.media.MediaPlayer
 import android.os.Parcelable
 import com.example.myapplication.api.APIArtist
 import com.example.myapplication.api.ArtistAPI
@@ -35,7 +36,3 @@ data class Song(
 ):Parcelable
 
 
-@Parcelize
-data class ListOfSongs(
-    val Songs : List<Song>
-):Parcelable

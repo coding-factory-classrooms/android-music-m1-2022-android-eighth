@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.ListOfSongs
 import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
 import com.example.myapplication.databinding.FragmentSongListBinding
