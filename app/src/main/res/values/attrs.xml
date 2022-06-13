@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="customBgColorItemList" format="color" />
+    <attr name="customBgColor" format="color" />
+
+</resources>
