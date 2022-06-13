@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 var globalMediaPlayer: MediaPlayer = MediaPlayer()
 
 class HomeFragment : Fragment() {
+
     val viewModel : LoginViewModel by viewModels()
 
     //Unify Media Player With This code in every fragment page
@@ -23,6 +24,8 @@ class HomeFragment : Fragment() {
 
 
     lateinit var binding: FragmentHomeBinding
+
+    // afficher la liste des playlists et sur un clique emmene sur un ecran different pour la gestion
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,4 +36,12 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.playlistButton.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToPlaylistFragment()
+            findNavController().navigate(action)
+        }
+    }
 }
+
