@@ -1,22 +1,23 @@
 package com.example.myapplication.audioPlayer
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
-import com.example.myapplication.api.globalApiKey
 import com.example.myapplication.databinding.FragmentAudioPlayerBinding
 import com.example.myapplication.globalMediaPlayer
+import com.example.myapplication.song.SongListViewModel
 import com.squareup.picasso.Picasso
+import java.io.File
+
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
@@ -29,6 +30,8 @@ class AudioPlayerFragment : Fragment() {
     private lateinit var binding: FragmentAudioPlayerBinding
     private val args : AudioPlayerFragmentArgs by navArgs()
     lateinit var runnable: Runnable
+
+    private val model : SongListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +57,6 @@ class AudioPlayerFragment : Fragment() {
 
         var handler: Handler = Handler()
 
-
-
         song = args.song
         album = args.album
         Songs = args.listOfSongs.toList()
@@ -73,6 +74,7 @@ class AudioPlayerFragment : Fragment() {
             playPreviousSong()
         }
         binding.NextButtonView.setOnClickListener(){
+
             playNextSong()
         }
         // auto play music
@@ -85,16 +87,19 @@ class AudioPlayerFragment : Fragment() {
                     globalMediaPlayer.seekTo(p1*1000)
                 }
             }
-
             override fun onStartTrackingTouch(p0: SeekBar?) {
                 // do nothing
             }
-
             override fun onStopTrackingTouch(p0: SeekBar?) {
                 // do nothing
             }
 
         })
+
+        //Auto Play Next Song on Media Player Completion
+        globalMediaPlayer.setOnCompletionListener{
+            playNextSong()
+        }
 
 
         runnable = Runnable {
@@ -117,14 +122,63 @@ class AudioPlayerFragment : Fragment() {
 
     }
 
+
+    // _____________________My Fuctions_____________________
+    private fun CheckSkip(){
+        if(CurrentIndex==Songs.size-1){
+            binding.NextButtonView.setImageResource(R.drawable.ic_baseline_skip_next_24_grey)
+        }else{
+            binding.NextButtonView.setImageResource(R.drawable.ic_baseline_skip_next_24)
+        }
+        if(CurrentIndex==0){
+            binding.PreviousButtonView.setImageResource(R.drawable.ic_baseline_skip_previous_24_grey)
+        }else{
+            binding.PreviousButtonView.setImageResource(R.drawable.ic_baseline_skip_previous_24)
+        }
+    }
+
     private fun playMusic() {
         globalMediaPlayer.reset()
-        globalMediaPlayer.setDataSource(song.file_url)
+
+        //Get the cached file
+        val fileName=song.file_url.substring(song.file_url.lastIndexOf("/")+1)
+        val songFile = File(requireContext().filesDir, fileName)
+
+        if(songFile.exists()){
+            globalMediaPlayer.setDataSource(songFile.path)
+        }else{
+            // Cache the files !
+            model.SaveFile(song.file_url,songFile.path)
+
+            globalMediaPlayer.setDataSource(song.file_url)
+        }
+
+        saveNextSongs()
         globalMediaPlayer.prepare()
         binding.seekBarView.progress = 0
         binding.seekBarView.max=song.duration
+        CheckSkip()
 
         globalMediaPlayer.start()
+    }
+
+    private fun saveNextSongs(){
+        if(CurrentIndex<Songs.size-1){
+            val nextSong = Songs.get(CurrentIndex+1)
+            val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
+            val songFile = File(requireContext().filesDir, fileName)
+            if(!songFile.exists()){
+                model.SaveFile(nextSong.file_url,songFile.path)
+            }
+        }
+        if(CurrentIndex<Songs.size-2){
+            val nextSong = Songs.get(CurrentIndex+2)
+            val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
+            val songFile = File(requireContext().filesDir, fileName)
+            if(!songFile.exists()){
+                model.SaveFile(nextSong.file_url,songFile.path)
+            }
+        }
     }
 
 
@@ -160,7 +214,6 @@ class AudioPlayerFragment : Fragment() {
     }
 
 
-
 }
 
 
@@ -178,16 +231,6 @@ fun getDisplayedTime(duration:Int) : String{
     return "$minutes:$displayedSeconds"
 }
 
-fun getDisplayedTimeFromMS(duration:Int) : String{
-    var minutes = (duration % 3600) / 60000
-    var seconds = (duration % 60000)
-    var displayedSeconds : String = if(seconds<10){
-        "0$seconds"
-    }else{
-        "$seconds"
-    }
-    return "$minutes:$displayedSeconds"
-}
 
 fun convertToMMSS(duration: String): String? {
     val millis = duration.toLong()
