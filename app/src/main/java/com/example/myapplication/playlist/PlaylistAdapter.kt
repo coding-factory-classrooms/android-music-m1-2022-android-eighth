@@ -78,8 +78,11 @@ class PlaylistAdapter(private var playlist:List<Playlist>)
         })
         var list = artistLiveData.value
 
+        Log.d("newList", "loadSongsToGlobalList: $list")
+
         var newList = list?.filter { artist ->artist.id in idsList }
 
+        Log.d("newList", "loadSongsToGlobalList: $newList")
         Allalbums.value=newList
         Log.d(TAG, "List: $newList ")
 

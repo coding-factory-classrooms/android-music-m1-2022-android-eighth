@@ -26,7 +26,7 @@ class AudioPlayerForPlayListFragment : Fragment() {
     lateinit var song : Song
     lateinit var Songs:List<Song>
     private lateinit var binding: FragmentAudioPlayerForPlayListBinding
-    private val args : AudioPlayerFragmentArgs by navArgs()
+    private val args : AudioPlayerForPlayListFragmentArgs by navArgs()
     lateinit var runnable: Runnable
 
     private val model : SongListViewModel by viewModels()
@@ -58,11 +58,11 @@ class AudioPlayerForPlayListFragment : Fragment() {
         song = args.song
 
         Songs = args.listOfSongs.toList()
-        globalSongList = Songs
-        if(globalCurrentIndex == globalSongList.indexOf(song)){
+
+        if(globalCurrentIndex == Songs.indexOf(song)){
 
         }
-        globalCurrentIndex = globalSongList.indexOf(song)
+        globalCurrentIndex = Songs.indexOf(song)
 
         binding.TotalTimeView.text = getDisplayedTime(song.duration)
         binding.SongTitleView.text=song.name
@@ -128,7 +128,7 @@ class AudioPlayerForPlayListFragment : Fragment() {
 
     // _____________________My Fuctions_____________________
     private fun CheckSkip(){
-        if(globalCurrentIndex == globalSongList.size-1){
+        if(globalCurrentIndex == Songs.size-1){
             binding.NextButtonView.setImageResource(R.drawable.ic_baseline_skip_next_24_grey)
         }else{
             binding.NextButtonView.setImageResource(R.drawable.ic_baseline_skip_next_24)
@@ -141,48 +141,48 @@ class AudioPlayerForPlayListFragment : Fragment() {
     }
 
     private fun playMusic() {
+            globalMediaPlayer.reset()
 
-        globalMediaPlayer.reset()
+            //Get the cached file
+            val fileName = song.file_url.substring(song.file_url.lastIndexOf("/") + 1)
+            try {
 
-        //Get the cached file
-        val fileName=song.file_url.substring(song.file_url.lastIndexOf("/")+1)
-        try {
+                val songFile = File(requireContext().filesDir, fileName)
+                if (songFile.exists()) {
+                    globalMediaPlayer.setDataSource(songFile.path)
+                } else {
+                    // Cache the files !
+                    model.SaveFile(song.file_url, songFile.path)
 
-            val songFile = File(requireContext().filesDir, fileName)
-            if(songFile.exists()){
-                globalMediaPlayer.setDataSource(songFile.path)
-            }else{
-                // Cache the files !
-                model.SaveFile(song.file_url,songFile.path)
+                    globalMediaPlayer.setDataSource(song.file_url)
+                }
 
-                globalMediaPlayer.setDataSource(song.file_url)
+            } catch (e: Exception) {
+                Log.e("CachingFile", "playMusic: ${e.toString()}",)
             }
 
-        }catch (e: Exception){
-            Log.e("CachingFile", "playMusic: ${e.toString()}", )
-        }
 
+            saveNextSongs()
+            globalMediaPlayer.prepare()
+            binding.seekBarView.progress = 0
+            binding.seekBarView.max = song.duration
+            CheckSkip()
 
-        saveNextSongs()
-        globalMediaPlayer.prepare()
-        binding.seekBarView.progress = 0
-        binding.seekBarView.max=song.duration
-        CheckSkip()
+            globalMediaPlayer.start()
 
-        globalMediaPlayer.start()
     }
 
     private fun saveNextSongs(){
-        if(globalCurrentIndex < globalSongList.size-1){
-            val nextSong = globalSongList.get(globalCurrentIndex +1)
+        if(globalCurrentIndex < Songs.size-1){
+            val nextSong = Songs.get(globalCurrentIndex +1)
             val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
             val songFile = File(requireContext().filesDir, fileName)
             if(!songFile.exists()){
                 model.SaveFile(nextSong.file_url,songFile.path)
             }
         }
-        if(globalCurrentIndex < globalSongList.size-2){
-            val nextSong = globalSongList.get(globalCurrentIndex +2)
+        if(globalCurrentIndex < Songs.size-2){
+            val nextSong = Songs.get(globalCurrentIndex +2)
             val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
             val songFile = File(requireContext().filesDir, fileName)
             if(!songFile.exists()){
@@ -202,8 +202,8 @@ class AudioPlayerForPlayListFragment : Fragment() {
     }
 
     private fun playNextSong(){
-        if(globalCurrentIndex < globalSongList.size-1){
-            song= globalSongList.get(globalCurrentIndex +1)
+        if(globalCurrentIndex < Songs.size-1){
+            song= Songs.get(globalCurrentIndex +1)
             binding.TotalTimeView.text = getDisplayedTime(song.duration)
             binding.SongTitleView.text=song.name
             binding.SongTitleView.isSelected
@@ -214,7 +214,7 @@ class AudioPlayerForPlayListFragment : Fragment() {
 
     private fun playPreviousSong(){
         if(globalCurrentIndex >0){
-            song= globalSongList.get(globalCurrentIndex -1)
+            song= Songs.get(globalCurrentIndex -1)
             binding.TotalTimeView.text = getDisplayedTime(song.duration)
             binding.SongTitleView.text=song.name
             binding.SongTitleView.isSelected

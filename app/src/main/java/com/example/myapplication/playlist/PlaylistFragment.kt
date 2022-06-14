@@ -16,6 +16,7 @@ import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
 import com.example.myapplication.artist.ArtistAdapter
 import com.example.myapplication.databinding.FragmentPlaylistBinding
+import com.example.myapplication.globalSelectedPlaylist
 
 // afficher le detail d'une playlist a partir d'ici ?
 
@@ -70,6 +71,7 @@ class PlaylistFragment: Fragment(){
     }
 
     private fun navigateToPlayListInfo(playlist: Playlist) {
+        globalSelectedPlaylist=playlist
         val action= PlaylistFragmentDirections.actionPlaylistFragmentToPlayListInfoFragment(playlist)
         findNavController().navigate(action)
     }

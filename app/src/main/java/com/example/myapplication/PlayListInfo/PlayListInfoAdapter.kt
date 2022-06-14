@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Song
 import com.example.myapplication.databinding.ItemSongBinding
 import com.example.myapplication.globalCurrentIndex
+import com.example.myapplication.globalMediaPlayer
 import com.example.myapplication.globalSongList
 import com.example.myapplication.song.SongAdapter
 
@@ -28,14 +29,7 @@ class PlayListInfoAdapter(private var songs:List<Song>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val Song = songs[position]
         with(holder.binding){
-            if(!globalSongList.isEmpty()){
-                if(Song == globalSongList.get(globalCurrentIndex)){
-                    songTitleView.setTextColor(Color.parseColor("#14b36c"))
-                    durationView.setTextColor(Color.parseColor("#14b36c"))
-                    createdAtView.setTextColor(Color.parseColor("#14b36c"))
-                    textView3.setTextColor(Color.parseColor("#14b36c"))
-                }
-            }
+
 
             var minutes = (Song.duration % 3600) / 60
             var seconds = Song.duration % 60

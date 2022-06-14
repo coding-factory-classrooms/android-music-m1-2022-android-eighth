@@ -10,6 +10,7 @@ import com.example.myapplication.api.APIArtist
 
 import com.example.myapplication.databinding.ItemSongBinding
 import com.example.myapplication.globalCurrentIndex
+import com.example.myapplication.globalMediaPlayer
 import com.example.myapplication.globalSongList
 
 class SongAdapter(private var songs:List<Song>)

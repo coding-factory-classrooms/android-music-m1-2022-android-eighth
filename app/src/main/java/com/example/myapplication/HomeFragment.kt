@@ -15,13 +15,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.login.LoginViewModel
+import com.example.myapplication.playlist.Playlist
 import java.io.File
 
 var globalMediaPlayer: MediaPlayer = MediaPlayer()
 var globalSongList : List<Song> = listOf()
 var globalCurrentIndex : Int = 0
 var globalCurrentPicasso : String =""
-
+var globalSelectedPlaylist = Playlist("")
 
 class HomeFragment : Fragment() {
 
@@ -29,7 +30,6 @@ class HomeFragment : Fragment() {
 
     //Unify Media Player With This code in every fragment page
 
-    var globalSomething : String = ""
 
 
 

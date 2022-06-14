@@ -29,6 +29,9 @@ interface PlaylistDao {
     @Query("SELECT * FROM `PlaylistArtist` WHERE Playlist LIKE :playListName AND ArtistId LIKE :id" )
     fun GetPlayListArtist(playListName: String,id:Int):List<PlaylistArtist>
 
+    @Query("SELECT * FROM `PlaylistArtist` WHERE Playlist LIKE :playListName " )
+    fun GetPlayListArtistByPlayList(playListName: String):List<PlaylistArtist>
+
     @Delete
     fun DeleteAlbumFromPlaylist(playlistArtist: PlaylistArtist)
 

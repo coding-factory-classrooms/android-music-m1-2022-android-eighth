@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -142,7 +143,9 @@ class AudioPlayerFragment : Fragment() {
     }
 
     private fun playMusic() {
+        if(song == globalSongList[globalCurrentIndex]){
 
+        }else{
         globalMediaPlayer.reset()
 
         //Get the cached file
@@ -171,6 +174,7 @@ class AudioPlayerFragment : Fragment() {
         CheckSkip()
 
         globalMediaPlayer.start()
+    }
     }
 
     private fun saveNextSongs(){
