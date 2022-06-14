@@ -15,6 +15,7 @@ private const val TAG = "GetArtistByID"
         override fun onResponse(call: Call<APIArtist>, response: Response<APIArtist>) {
             val responsArtist = response.body()
             apiArtist = responsArtist!!
+            Log.d(TAG, "onResponse: $apiArtist")
         }
 
         override fun onFailure(call: Call<APIArtist>, t: Throwable) {

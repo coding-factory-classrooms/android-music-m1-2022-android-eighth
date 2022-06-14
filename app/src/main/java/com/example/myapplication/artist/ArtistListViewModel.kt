@@ -23,7 +23,6 @@ class ArtistListViewModel : ViewModel() {
     fun loadArtists(){
 
 
-
         val call = ServiceBuilder.buildService(ArtistAPI::class.java).GetArtistsList("Token $globalApiKey")
         call.enqueue(object :  Callback<List<APIArtist>> {
             override fun onResponse(call: Call<List<APIArtist>>, response: Response<List<APIArtist>>) {

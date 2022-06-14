@@ -20,6 +20,7 @@ import java.io.File
 var globalMediaPlayer: MediaPlayer = MediaPlayer()
 var globalSongList : List<Song> = listOf()
 var globalCurrentIndex : Int = 0
+var globalCurrentPicasso : String =""
 
 
 class HomeFragment : Fragment() {

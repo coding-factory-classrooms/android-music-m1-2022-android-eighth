@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.App
+import com.example.myapplication.HomeFragmentDirections
 import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
 import com.example.myapplication.artist.ArtistAdapter
@@ -25,7 +28,7 @@ class PlaylistFragment: Fragment(){
     lateinit var binding: FragmentPlaylistBinding
     private val model : PlaylistViewModel by viewModels()
     private lateinit var adapter: PlaylistAdapter
-
+    private lateinit var Allalbums: List<APIArtist>
 
 
     override fun onCreateView(
@@ -42,18 +45,33 @@ class PlaylistFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         model.getPlaylistLiveData().observe(viewLifecycleOwner, Observer{ playlist -> updatePlaylist(playlist!! )})
-
+        model.getPlaylistLiveData().observe(viewLifecycleOwner, Observer{ playlist -> updatePlaylist(playlist!! )})
         adapter = PlaylistAdapter(listOf())
 
-        /*      --  redirection vers la liste des sons de la playlist --
+        adapter.playlistLiveData.observe(viewLifecycleOwner, Observer { Playlist -> navigateToPlayListInfo(Playlist) })
 
-        adapter.playlistLiveData.observe(viewLifecycleOwner, Observer { album -> navigateToSongsList(album) })
-         */
         binding.playlistRecyclerView.adapter = adapter
         binding.playlistRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.AddPlayListButton.setOnClickListener{
+            var last = 0
+            if(App.db.playlistDao().getLastPlaylist()!=null){
+                 last = App.db.playlistDao().getLastPlaylist().name.last().toString().toInt()
+            }else{
+                 last=0
+            }
 
+            val Total = last+1
+            var p : Playlist = Playlist("MyPlayList$Total")
+
+            addPlayList(p)
+        }
         model.load()
 
+    }
+
+    private fun navigateToPlayListInfo(playlist: Playlist) {
+        val action= PlaylistFragmentDirections.actionPlaylistFragmentToPlayListInfoFragment(playlist)
+        findNavController().navigate(action)
     }
 
     private fun updatePlaylist(playlist: List<Playlist>) {
@@ -61,4 +79,10 @@ class PlaylistFragment: Fragment(){
             Log.i(TAG, "Update done bg {$playlist}")
             adapter.updateDataSet(playlist)
     }
+
+    private fun addPlayList(playlist: Playlist){
+        model.addPlaylist(playlist)
+        model.load()
+    }
+
 }

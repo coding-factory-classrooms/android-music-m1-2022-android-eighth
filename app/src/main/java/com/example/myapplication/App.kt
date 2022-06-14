@@ -14,7 +14,7 @@ class App : Application() {
         super.onCreate()
          db = Room.databaseBuilder(
             applicationContext,
-            AppDatabase::class.java, "Music.db"
+            AppDatabase::class.java, "Music3.db"
         ).allowMainThreadQueries()
             .build()
 

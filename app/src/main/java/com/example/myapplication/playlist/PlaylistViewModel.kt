@@ -19,4 +19,12 @@ class PlaylistViewModel: ViewModel(){
         val playlists = App.db.playlistDao().getAllPlaylist()
         PlaylistLiveData.value = playlists
     }
+
+    fun addPlaylist(playlist: Playlist){
+        App.db.playlistDao().Insert(playlist)
+    }
+
+    fun deletePlaylist(playlist: Playlist){
+        App.db.playlistDao().deletePlayList(playlist)
+    }
 }
