@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.HomeFragmentDirections
 import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
 import com.example.myapplication.artist.ArtistAdapter
@@ -39,6 +41,11 @@ class PlaylistFragment: Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        binding.createPlaylistButton.setOnClickListener{
+            val action = PlaylistFragmentDirections.actionPlaylistFragmentToFormNewPlaylistFragment()
+            findNavController().navigate(action)
+        }
         super.onViewCreated(view, savedInstanceState)
 
         model.getPlaylistLiveData().observe(viewLifecycleOwner, Observer{ playlist -> updatePlaylist(playlist!! )})

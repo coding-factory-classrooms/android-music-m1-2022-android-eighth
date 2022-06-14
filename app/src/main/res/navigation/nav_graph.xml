@@ -36,5 +36,17 @@
     <fragment
         android:id="@+id/playlistFragment"
         android:name="com.example.myapplication.playlist.PlaylistFragment"
-        android:label="PlaylistFragment" />
+        android:label="PlaylistFragment" >
+        <action
+            android:id="@+id/action_playlistFragment_to_formNewPlaylistFragment"
+            app:destination="@id/formNewPlaylistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formNewPlaylistFragment"
+        android:name="com.example.myapplication.playlist.FormNewPlaylistFragment"
+        android:label="FormNewPlaylistFragment" >
+        <action
+            android:id="@+id/action_formNewPlaylistFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
 </navigation>

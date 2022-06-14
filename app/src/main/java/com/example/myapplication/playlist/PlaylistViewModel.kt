@@ -3,9 +3,11 @@ package com.example.myapplication.playlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.App
 import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
+import kotlinx.coroutines.launch
 
 class PlaylistViewModel: ViewModel(){
     // create , update , delete playlist
@@ -18,5 +20,9 @@ class PlaylistViewModel: ViewModel(){
     fun load(){
         val playlists = App.db.playlistDao().getAllPlaylist()
         PlaylistLiveData.value = playlists
+    }
+
+    fun insertPlaylist(playlists: Playlist) = viewModelScope.launch{
+         App.db.playlistDao().insert(playlists)
     }
 }

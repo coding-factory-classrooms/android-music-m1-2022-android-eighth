@@ -5,24 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlistRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="150dp"
+    <EditText
+        android:id="@+id/playlistEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_playlist" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/createPlaylistButton"
+        android:id="@+id/validatePlaylistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="250dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/playlistEditName"
+        app:layout_constraintStart_toStartOf="@+id/playlistEditName"
+        app:layout_constraintTop_toBottomOf="@+id/playlistEditName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

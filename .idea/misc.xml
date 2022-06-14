@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/fragment_artist_list.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/fragment_form_new_playlist.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.10416666666666667" />
         <entry key="app/src/main/res/layout/fragment_playlist.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.14175724637681159" />
