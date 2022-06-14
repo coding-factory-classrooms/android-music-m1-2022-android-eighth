@@ -1,5 +1,6 @@
 package com.example.myapplication.song
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +9,8 @@ import com.example.myapplication.Song
 import com.example.myapplication.api.APIArtist
 
 import com.example.myapplication.databinding.ItemSongBinding
+import com.example.myapplication.globalCurrentIndex
+import com.example.myapplication.globalSongList
 
 class SongAdapter(private var songs:List<Song>)
     :RecyclerView.Adapter<SongAdapter.ViewHolder>(){
@@ -28,6 +31,15 @@ class SongAdapter(private var songs:List<Song>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val Song = songs[position]
         with(holder.binding){
+            if(!globalSongList.isEmpty()){
+                if(Song == globalSongList.get(globalCurrentIndex)){
+                    songTitleView.setTextColor(Color.parseColor("#14b36c"))
+                    durationView.setTextColor(Color.parseColor("#14b36c"))
+                    createdAtView.setTextColor(Color.parseColor("#14b36c"))
+                    textView3.setTextColor(Color.parseColor("#14b36c"))
+                }
+            }
+
             var minutes = (Song.duration % 3600) / 60
             var seconds = Song.duration % 60
             songTitleView.text=Song.name

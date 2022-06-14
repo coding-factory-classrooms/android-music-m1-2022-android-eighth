@@ -52,7 +52,7 @@ class ArtistListFragment : Fragment() {
     private fun updateArtists(artists: List<APIArtist>) {
 
         // TO FILTER OUR LIST TO A SINGLE GENRE, COMMENT THE NEXT LINE IF YOU WANT TO REMOVE THE FILTER
-        var newArtistList = artists.filter { apiArtist -> apiArtist.genre_name=="Retro Games" }
+        var newArtistList = artists.filter { apiArtist -> apiArtist.genre_name=="Drill" }
 
         adapter.updateDataSet(newArtistList)
     }
