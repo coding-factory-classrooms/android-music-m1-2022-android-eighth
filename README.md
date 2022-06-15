@@ -7,7 +7,7 @@ BackEnd : provided by our Teacher Robin
 
 Architecutre Used : **MVVM**
 
-**functions containted in this project : **
+functions containted in this project :
     - Media Player using a seekbar
     - RecyclerViews to display the Album or the Playlist contained songs and to display the different albums we have
     - Cache 1+ songs
