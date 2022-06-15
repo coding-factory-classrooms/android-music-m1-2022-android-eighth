@@ -1,6 +1,7 @@
 package com.example.myapplication.PlayListInfo
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
@@ -39,6 +40,19 @@ class PlayListInfoAdapter(private var songs:List<Song>)
                 SongLiveData.value= Song
             }
             createdAtView.text=Song.created_at.reversed().substring(22).reversed()
+            if(!globalSongList.isEmpty() && globalMediaPlayer.isPlaying){
+                if(globalCurrentIndex!=600){
+                    if(songs[position].name == globalSongList.get(globalCurrentIndex!!).name){
+                        // if globalCurrentIndex > 5 Then color globalSongList[globalCurrentIndex - 5]
+                        // For no apparent reason . idk why :'''(
+                        // please help
+                        songTitleView.setTextColor(Color.parseColor("#14b36c"))
+                        durationView.setTextColor(Color.parseColor("#14b36c"))
+                        createdAtView.setTextColor(Color.parseColor("#14b36c"))
+                        textView3.setTextColor(Color.parseColor("#14b36c"))
+                    }
+                }
+            }
         }
     }
 

@@ -42,12 +42,12 @@ class PlayListAddRemoveArtistFragment : Fragment() {
 
 
         adapter = AdapterAddRemove(listOf())
-
-
+        adapter.albumlivedata.observe(viewLifecycleOwner, Observer { artist ->
+            deleteitem(artist)
+        })
         model.getArtistLiveData().observe(viewLifecycleOwner, Observer{ artists -> updateArtists(artists!! )})
         binding.RecyclerViewAddRemove.adapter = adapter
         binding.RecyclerViewAddRemove.layoutManager = LinearLayoutManager(context)
-
 
 
         binding.nameView.text=playlist.name
@@ -56,9 +56,7 @@ class PlayListAddRemoveArtistFragment : Fragment() {
 
     }
 
-    class Add_RemoveAlbumToThis(album: APIArtist?) {
 
-    }
 
     private fun updateArtists(artists: List<APIArtist>) {
 
@@ -66,6 +64,11 @@ class PlayListAddRemoveArtistFragment : Fragment() {
         var newArtistList = artists.filter { apiArtist -> apiArtist.genre_name=="Drill" }
 
         adapter.updateDataSet(newArtistList)
+    }
+
+    private fun deleteitem(artist : APIArtist){
+        adapter.addRemoveArtist(artist)
+
     }
 
 }

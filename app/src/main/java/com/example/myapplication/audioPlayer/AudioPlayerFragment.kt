@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -60,6 +59,7 @@ class AudioPlayerFragment : Fragment() {
         song = args.song
         album = args.album
         Songs = args.listOfSongs.toList()
+
         globalSongList = Songs
         if(globalCurrentIndex== globalSongList.indexOf(song)){
 
@@ -83,7 +83,9 @@ class AudioPlayerFragment : Fragment() {
         }
         // auto play music
 
-        playMusic()
+            playMusic()
+
+
 
         // Change seekbar position whenever mediaplayer's position changes
         binding.seekBarView.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
@@ -143,9 +145,7 @@ class AudioPlayerFragment : Fragment() {
     }
 
     private fun playMusic() {
-        if(song == globalSongList[globalCurrentIndex]){
-
-        }else{
+        // Check if Current Song play = Song Selected - removed
         globalMediaPlayer.reset()
 
         //Get the cached file
@@ -174,7 +174,6 @@ class AudioPlayerFragment : Fragment() {
         CheckSkip()
 
         globalMediaPlayer.start()
-    }
     }
 
     private fun saveNextSongs(){

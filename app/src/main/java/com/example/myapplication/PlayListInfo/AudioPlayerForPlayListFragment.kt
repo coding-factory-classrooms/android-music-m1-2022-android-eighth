@@ -58,11 +58,11 @@ class AudioPlayerForPlayListFragment : Fragment() {
         song = args.song
 
         Songs = args.listOfSongs.toList()
-
+        globalCurrentIndex = Songs.indexOf(song)
         if(globalCurrentIndex == Songs.indexOf(song)){
 
         }
-        globalCurrentIndex = Songs.indexOf(song)
+
 
         binding.TotalTimeView.text = getDisplayedTime(song.duration)
         binding.SongTitleView.text=song.name
@@ -173,16 +173,17 @@ class AudioPlayerForPlayListFragment : Fragment() {
     }
 
     private fun saveNextSongs(){
-        if(globalCurrentIndex < Songs.size-1){
-            val nextSong = Songs.get(globalCurrentIndex +1)
+
+        if(globalCurrentIndex!! < Songs.size-1){
+            val nextSong = Songs.get(globalCurrentIndex!! +1)
             val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
             val songFile = File(requireContext().filesDir, fileName)
             if(!songFile.exists()){
                 model.SaveFile(nextSong.file_url,songFile.path)
             }
         }
-        if(globalCurrentIndex < Songs.size-2){
-            val nextSong = Songs.get(globalCurrentIndex +2)
+        if(globalCurrentIndex!! < Songs.size-2){
+            val nextSong = Songs.get(globalCurrentIndex!! +2)
             val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
             val songFile = File(requireContext().filesDir, fileName)
             if(!songFile.exists()){
@@ -202,23 +203,23 @@ class AudioPlayerForPlayListFragment : Fragment() {
     }
 
     private fun playNextSong(){
-        if(globalCurrentIndex < Songs.size-1){
-            song= Songs.get(globalCurrentIndex +1)
+        if(globalCurrentIndex!! < Songs.size-1){
+            song= Songs.get(globalCurrentIndex!! +1)
             binding.TotalTimeView.text = getDisplayedTime(song.duration)
             binding.SongTitleView.text=song.name
             binding.SongTitleView.isSelected
-            globalCurrentIndex += 1
+            globalCurrentIndex =globalCurrentIndex!!+ 1
             playMusic()
         }
     }
 
     private fun playPreviousSong(){
-        if(globalCurrentIndex >0){
-            song= Songs.get(globalCurrentIndex -1)
+        if(globalCurrentIndex!! >0){
+            song= Songs.get(globalCurrentIndex!! -1)
             binding.TotalTimeView.text = getDisplayedTime(song.duration)
             binding.SongTitleView.text=song.name
             binding.SongTitleView.isSelected
-            globalCurrentIndex -= 1
+            globalCurrentIndex =globalCurrentIndex!!- 1
             playMusic()
         }
     }

@@ -37,8 +37,7 @@ class AdapterAddRemove(private var artists:List<APIArtist>)
             Picasso.get().load(artist.album_cover_url)
                 .into(imageView)
             addRemoveButton.setOnClickListener{
-                addRemoveArtist(artist)
-                Log.d("WORKS", "onViewCreated: Adapter works")
+                //addRemoveArtist(artist)
                 albumlivedata.value= artist
                 updateDataSet(artists)
             }

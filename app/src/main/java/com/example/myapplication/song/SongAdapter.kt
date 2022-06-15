@@ -31,14 +31,18 @@ class SongAdapter(private var songs:List<Song>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val Song = songs[position]
+
         with(holder.binding){
-            if(!globalSongList.isEmpty()){
-                if(Song == globalSongList.get(globalCurrentIndex)){
-                    songTitleView.setTextColor(Color.parseColor("#14b36c"))
-                    durationView.setTextColor(Color.parseColor("#14b36c"))
-                    createdAtView.setTextColor(Color.parseColor("#14b36c"))
-                    textView3.setTextColor(Color.parseColor("#14b36c"))
+            if(!globalSongList.isEmpty() && globalMediaPlayer.isPlaying){
+                if(globalCurrentIndex!=null){
+                    if(Song == globalSongList.get(globalCurrentIndex!!)){
+                        songTitleView.setTextColor(Color.parseColor("#14b36c"))
+                        durationView.setTextColor(Color.parseColor("#14b36c"))
+                        createdAtView.setTextColor(Color.parseColor("#14b36c"))
+                        textView3.setTextColor(Color.parseColor("#14b36c"))
+                    }
                 }
+
             }
 
             var minutes = (Song.duration % 3600) / 60

@@ -20,7 +20,7 @@ import java.io.File
 
 var globalMediaPlayer: MediaPlayer = MediaPlayer()
 var globalSongList : List<Song> = listOf()
-var globalCurrentIndex : Int = 0
+var globalCurrentIndex : Int = 600
 var globalCurrentPicasso : String =""
 var globalSelectedPlaylist = Playlist("")
 
