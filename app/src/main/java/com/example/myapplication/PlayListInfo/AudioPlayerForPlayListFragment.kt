@@ -1,33 +1,32 @@
-package com.example.myapplication.audioPlayer
+package com.example.myapplication.PlayListInfo
 
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.*
 import com.example.myapplication.api.APIArtist
+import com.example.myapplication.audioPlayer.AudioPlayerFragmentArgs
 import com.example.myapplication.databinding.FragmentAudioPlayerBinding
+import com.example.myapplication.databinding.FragmentAudioPlayerForPlayListBinding
 import com.example.myapplication.song.SongListViewModel
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.lang.Exception
-
 import java.util.concurrent.TimeUnit
-import kotlin.properties.Delegates
 
 
-class AudioPlayerFragment : Fragment() {
+class AudioPlayerForPlayListFragment : Fragment() {
     lateinit var song : Song
-    lateinit var album : APIArtist
     lateinit var Songs:List<Song>
-    private lateinit var binding: FragmentAudioPlayerBinding
-    private val args : AudioPlayerFragmentArgs by navArgs()
+    private lateinit var binding: FragmentAudioPlayerForPlayListBinding
+    private val args : AudioPlayerForPlayListFragmentArgs by navArgs()
     lateinit var runnable: Runnable
 
     private val model : SongListViewModel by viewModels()
@@ -42,7 +41,7 @@ class AudioPlayerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding=  FragmentAudioPlayerBinding.inflate(inflater,container,false)
+        binding=  FragmentAudioPlayerForPlayListBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -57,19 +56,18 @@ class AudioPlayerFragment : Fragment() {
         var handler: Handler = Handler()
 
         song = args.song
-        album = args.album
-        Songs = args.listOfSongs.toList()
 
-        globalSongList = Songs
-        if(globalCurrentIndex== globalSongList.indexOf(song)){
+        Songs = args.listOfSongs.toList()
+        globalCurrentIndex = Songs.indexOf(song)
+        if(globalCurrentIndex == Songs.indexOf(song)){
 
         }
-        globalCurrentIndex = globalSongList.indexOf(song)
+
 
         binding.TotalTimeView.text = getDisplayedTime(song.duration)
         binding.SongTitleView.text=song.name
         binding.SongTitleView.isSelected
-        Picasso.get().load(album.album_cover_url)
+        Picasso.get().load("https://image.similarpng.com/very-thumbnail/2020/12/Popular-Music-icon-in-round-black-color-on-transparent-background-PNG.png")
             .into(binding.imageView3)
         binding.PausePlayButtonView.setOnClickListener(){
             pausePlayMusic()
@@ -83,14 +81,12 @@ class AudioPlayerFragment : Fragment() {
         }
         // auto play music
 
-            playMusic()
-
-
+        playMusic()
 
         // Change seekbar position whenever mediaplayer's position changes
-        binding.seekBarView.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
+        binding.seekBarView.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, fromUser: Boolean) {
-                if(fromUser && globalMediaPlayer!=null){
+                if(fromUser && globalMediaPlayer !=null){
                     globalMediaPlayer.seekTo(p1*1000)
                 }
             }
@@ -111,7 +107,7 @@ class AudioPlayerFragment : Fragment() {
 
         runnable = Runnable {
             run(){
-                if(globalMediaPlayer!=null){
+                if(globalMediaPlayer !=null){
                     binding.seekBarView.progress = globalMediaPlayer.currentPosition/1000
                     binding.CurrentTimeView.text=convertToMMSS("${globalMediaPlayer.currentPosition}")
                     if(globalMediaPlayer.isPlaying){
@@ -132,12 +128,12 @@ class AudioPlayerFragment : Fragment() {
 
     // _____________________My Fuctions_____________________
     private fun CheckSkip(){
-        if(globalCurrentIndex==globalSongList.size-1){
+        if(globalCurrentIndex == Songs.size-1){
             binding.NextButtonView.setImageResource(R.drawable.ic_baseline_skip_next_24_grey)
         }else{
             binding.NextButtonView.setImageResource(R.drawable.ic_baseline_skip_next_24)
         }
-        if(globalCurrentIndex==0){
+        if(globalCurrentIndex ==0){
             binding.PreviousButtonView.setImageResource(R.drawable.ic_baseline_skip_previous_24_grey)
         }else{
             binding.PreviousButtonView.setImageResource(R.drawable.ic_baseline_skip_previous_24)
@@ -145,48 +141,49 @@ class AudioPlayerFragment : Fragment() {
     }
 
     private fun playMusic() {
-        // Check if Current Song play = Song Selected - removed
-        globalMediaPlayer.reset()
+            globalMediaPlayer.reset()
 
-        //Get the cached file
-        val fileName=song.file_url.substring(song.file_url.lastIndexOf("/")+1)
-        try {
+            //Get the cached file
+            val fileName = song.file_url.substring(song.file_url.lastIndexOf("/") + 1)
+            try {
 
-            val songFile = File(requireContext().filesDir, fileName)
-            if(songFile.exists()){
-                globalMediaPlayer.setDataSource(songFile.path)
-            }else{
-                // Cache the files !
-                model.SaveFile(song.file_url,songFile.path)
+                val songFile = File(requireContext().filesDir, fileName)
+                if (songFile.exists()) {
+                    globalMediaPlayer.setDataSource(songFile.path)
+                } else {
+                    // Cache the files !
+                    model.SaveFile(song.file_url, songFile.path)
 
-                globalMediaPlayer.setDataSource(song.file_url)
+                    globalMediaPlayer.setDataSource(song.file_url)
+                }
+
+            } catch (e: Exception) {
+                Log.e("CachingFile", "playMusic: ${e.toString()}",)
             }
 
-        }catch (e: Exception ){
-            Log.e("CachingFile", "playMusic: ${e.toString()}", )
-        }
 
+            saveNextSongs()
+            globalMediaPlayer.prepare()
+            binding.seekBarView.progress = 0
+            binding.seekBarView.max = song.duration
+            CheckSkip()
 
-        saveNextSongs()
-        globalMediaPlayer.prepare()
-        binding.seekBarView.progress = 0
-        binding.seekBarView.max=song.duration
-        CheckSkip()
+            globalMediaPlayer.start()
 
-        globalMediaPlayer.start()
     }
 
     private fun saveNextSongs(){
-        if(globalCurrentIndex<globalSongList.size-1){
-            val nextSong = globalSongList.get(globalCurrentIndex+1)
+
+        if(globalCurrentIndex!! < Songs.size-1){
+            val nextSong = Songs.get(globalCurrentIndex!! +1)
             val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
             val songFile = File(requireContext().filesDir, fileName)
             if(!songFile.exists()){
                 model.SaveFile(nextSong.file_url,songFile.path)
             }
         }
-        if(globalCurrentIndex<globalSongList.size-2){
-            val nextSong = globalSongList.get(globalCurrentIndex+2)
+        if(globalCurrentIndex!! < Songs.size-2){
+            val nextSong = Songs.get(globalCurrentIndex!! +2)
             val fileName=nextSong.file_url.substring(nextSong.file_url.lastIndexOf("/")+1)
             val songFile = File(requireContext().filesDir, fileName)
             if(!songFile.exists()){
@@ -206,23 +203,23 @@ class AudioPlayerFragment : Fragment() {
     }
 
     private fun playNextSong(){
-        if(globalCurrentIndex<globalSongList.size-1){
-            song=globalSongList.get(globalCurrentIndex+1)
+        if(globalCurrentIndex!! < Songs.size-1){
+            song= Songs.get(globalCurrentIndex!! +1)
             binding.TotalTimeView.text = getDisplayedTime(song.duration)
             binding.SongTitleView.text=song.name
             binding.SongTitleView.isSelected
-            globalCurrentIndex += 1
+            globalCurrentIndex =globalCurrentIndex!!+ 1
             playMusic()
         }
     }
 
     private fun playPreviousSong(){
-        if(globalCurrentIndex>0){
-            song=globalSongList.get(globalCurrentIndex-1)
+        if(globalCurrentIndex!! >0){
+            song= Songs.get(globalCurrentIndex!! -1)
             binding.TotalTimeView.text = getDisplayedTime(song.duration)
             binding.SongTitleView.text=song.name
             binding.SongTitleView.isSelected
-            globalCurrentIndex -= 1
+            globalCurrentIndex =globalCurrentIndex!!- 1
             playMusic()
         }
     }
