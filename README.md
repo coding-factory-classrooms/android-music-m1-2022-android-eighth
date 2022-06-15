@@ -1,5 +1,5 @@
 # Spofity
-![image](https://user-images.githubusercontent.com/61171763/173767689-e6138c9c-1d96-44e0-bda6-d9b9e5841779.png)
+![image](https://user-images.githubusercontent.com/61171763/173767689-e6138c9c-1d96-44e0-bda6-d9b9e5841779.png) [The APK](https://github.com/coding-factory-classrooms/android-music-m1-2021-android-eighth/blob/main/Spofity.apk)
 
 Clearly a very original theme idea, and definitley not stolen from Spotify
 
@@ -26,6 +26,5 @@ functions containted in this project :
 - [Auto Play] Whenever we exist the Media Player Fragment, and the MediaPlayer verifies onCompletion it tries to **Next** the song but the app crashes.
 
 
-
-[center]![image](https://user-images.githubusercontent.com/61171763/173765383-7b0a8b4a-c077-4da0-963f-363a3d1382fe.png)[/center]
+![image](https://user-images.githubusercontent.com/61171763/173765383-7b0a8b4a-c077-4da0-963f-363a3d1382fe.png)
 
