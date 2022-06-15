@@ -1,1 +1,27 @@
-# android-music-m1-2021-android-eighth
+# Spofity
+
+Clearly a very original theme idea, and definitley not stolen from Spotify
+
+BackEnd : provided by our Teacher Robin 
+
+
+Architecutre Used : **MVVM**
+
+**functions containted in this project : **
+    - Media Player using a seekbar
+    - RecyclerViews to display the Album or the Playlist contained songs and to display the different albums we have
+    - Cache 1+ songs
+    - Create / Delete a playlist
+    - Add / Remove 1+ albums to a playlist
+    - Play / Next / Previous / Song.
+    - Auto Play Next Song
+    - Color the song being played in your RecyclerView
+    - using the library Room to create a Database, and store our Playlists there along side the albums each playlist contains
+    
+**Errors not resolved :**
+    - [Music Player] Resetting MediaPlayer onPlayMusic even if the currently played music is the one that was Pressed.
+    - [PlayList] if our GlobalCurrentIndex >5, our system colors the Song in the GlobalCurrentIndex + the song in the globalCurrentIndex - 5 for no reason .. :(
+    - [Auto Play] Whenever we exist the Media Player Fragment, and the MediaPlayer verifies onCompletion it tries to **Next** the song but the app crashes.
+
+
+![image](https://user-images.githubusercontent.com/61171763/173765383-7b0a8b4a-c077-4da0-963f-363a3d1382fe.png)
