@@ -1,4 +1,5 @@
 # Spofity
+![image](https://user-images.githubusercontent.com/61171763/173767689-e6138c9c-1d96-44e0-bda6-d9b9e5841779.png)
 
 Clearly a very original theme idea, and definitley not stolen from Spotify
 
@@ -17,11 +18,13 @@ functions containted in this project :
 - Auto Play Next Song
 - Color the song being played in your RecyclerView
 - using the library Room to create a Database, and store our Playlists there along side the albums each playlist contains
-    
+- And more ..
+
 **Errors not resolved :**
 - [Music Player] Resetting MediaPlayer onPlayMusic even if the currently played music is the one that was Pressed.
 - [PlayList] if our GlobalCurrentIndex >5, our system colors the Song in the GlobalCurrentIndex + the song in the globalCurrentIndex - 5 for no reason .. :(
 - [Auto Play] Whenever we exist the Media Player Fragment, and the MediaPlayer verifies onCompletion it tries to **Next** the song but the app crashes.
+
 
 
 ![image](https://user-images.githubusercontent.com/61171763/173765383-7b0a8b4a-c077-4da0-963f-363a3d1382fe.png)
