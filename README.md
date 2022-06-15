@@ -1,5 +1,5 @@
 # Spofity
-![image](https://user-images.githubusercontent.com/61171763/173767689-e6138c9c-1d96-44e0-bda6-d9b9e5841779.png) [The APK](https://github.com/coding-factory-classrooms/android-music-m1-2021-android-eighth/blob/main/Spofity.apk "download")
+![image](https://user-images.githubusercontent.com/61171763/173767689-e6138c9c-1d96-44e0-bda6-d9b9e5841779.png) [The APK](https://github.com/coding-factory-classrooms/android-music-m1-2021-android-eighth/blob/main/Spofity.apk?raw=true)
 
 Clearly a very original theme idea, and definitley not stolen from Spotify
 
