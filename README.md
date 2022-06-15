@@ -28,3 +28,6 @@ functions containted in this project :
 
 ![image](https://user-images.githubusercontent.com/61171763/173765383-7b0a8b4a-c077-4da0-963f-363a3d1382fe.png)
 
+
+Very Helpful tutorial, definitley saved us a lot of time : [Youtube video](https://www.youtube.com/watch?v=1D1Jo1sLBMo&ab_channel=EasyTuto)
+The Playlists made by Robin were indispensable
