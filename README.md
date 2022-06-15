@@ -26,5 +26,6 @@ functions containted in this project :
 - [Auto Play] Whenever we exist the Media Player Fragment, and the MediaPlayer verifies onCompletion it tries to **Next** the song but the app crashes.
 
 
-
+<p align="center">
 ![image](https://user-images.githubusercontent.com/61171763/173765383-7b0a8b4a-c077-4da0-963f-363a3d1382fe.png)
+</p>
